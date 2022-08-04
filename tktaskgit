@@ -1,0 +1,56 @@
+package seleniumproject;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class oyotask {
+	void openweb(WebDriver driver)
+	{
+		String url ="https://www.agoda.com/en-in/region/oyo-state-ng.html?device=c&network=g&adid=576976080714&rand=89730217733262437&expid=&adpos=&aud=kwd-528989806981&site_id=1891440&tag=1c4a0edc-331b-4377-9ce9-354e093427a8&gclid=CjwKCAjwq5-WBhB7EiwAl-HEknE5oTzNfGV52O57RW0C-9SQGSw9ZSvLR2pY1D2rbPgr25Ege6Vm2RoCL0wQAvD_BwE";
+		driver.get(url);
+		driver.navigate().to(url);
+		driver.manage().window().maximize();
+	}
+	void oyotext(WebDriver driver)
+	{
+		WebElement oyotextbox=driver.findElement(By.xpath("//*[starts-with(@class,'SearchBoxTextEditor SearchBoxTextEditor--autocomplete')]"));
+	    oyotextbox.sendKeys("pune");
+	    oyotextbox.click();
+	    List<WebElement>hotel=driver.findElements(By.xpath("//*[starts-with(@class,'Suggestion Suggestion__categoryName')]"));
+	    
+	    for(WebElement xyz:hotel)
+	    {
+	    	System.out.println(xyz.getText());
+	    
+	    	
+	    	if(xyz.getText().equalsIgnoreCase("Stay in the heart of Pune"));
+	    	{
+	    	xyz.click();
+	    	}
+	    }
+
+	    
+		
+		
+	}
+	
+@SuppressWarnings("deprecation")
+public static void main(String[] args) {
+	System.setProperty("webdriver.chrome.driver","C:/Users/hp/Downloads/chromedriver_win32 (1)/chromedriver.exe");
+	   
+	   WebDriver driver=new ChromeDriver();
+	   
+	   driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+	   oyotask obj= new oyotask();
+	   obj.openweb(driver);
+	   obj.oyotext(driver);
+
+
+
+}
+}
